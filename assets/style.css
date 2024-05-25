@@ -1,11 +1,21 @@
+:root {
+    --lightblue: #5ba9ee;
+    --darkblue: #0C1821;
+    --blue: #0101b3;
+}
+
 #randombtn {
     border: 3px solid black;
     padding: 3px;
+    background-color: var(--lightblue);
+    color: var(--blue);
 }
 
 #excusebtn {
     border: 3px solid black;
     padding: 3px;
+  
+/* adding-modal */
 }
 
 .Modal-container {
@@ -55,3 +65,41 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+    background-color: var(--lightblue);
+    color: var(--blue);
+}
+
+
+.navbar {
+    background-color: #003f5c;
+    color: var(--lightblue);
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;   
+}
+
+.navbar a {
+    display: inline-block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--lightblue);
+}
+
+body {
+    background-color: var(--darkblue);
+}
+
+#random-excuse {
+    color: var(--lightblue);
+}
+
+#specific-excuse {
+    color: var(--lightblue);
+}
+
+/* our custom background color */
+.background {
+    background-color: black;
+    color: var(--lightblue);
+}
