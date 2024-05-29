@@ -1,5 +1,6 @@
 const RExcuse = document.getElementById('randombtn');
 const excuseContainer = document.getElementById('excuseContainer');
+const Ccontent = document.getElementById('displaycontent');
 
 RExcuse.addEventListener('click', myFunction);
 
@@ -14,6 +15,9 @@ function myFunction() {
             const quotedExcuse = `"${excuseText}"`;
             // Update the content of the 'excuseContainer' div with the quoted excuse text
             excuseContainer.textContent = quotedExcuse;
+
+            // Save last random excuse to local storage
+            localStorage.setItem('quotedExcuse', JSON.stringify(quotedExcuse));
         })
         .catch(error => {
             console.error('Error fetching excuse:', error);
@@ -45,3 +49,39 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+// Initialize the calendar
+function initCalendar() {
+  const today = dayjs();
+  const calendarDiv = document.getElementById('calendar');
+  calendarDiv.innerHTML = '';
+
+  // Display calendar for the current month
+  const startOfMonth = today.startOf('month');
+  const endOfMonth = today.endOf('month');
+  const currentMonth = startOfMonth.month();
+  const daysInMonth = endOfMonth.date();
+}
+
+// Function to add event
+function addEvent() {
+  const eventDateInput = document.getElementById('event-date');
+  const eventNameInput = document.getElementById('event-name');
+
+  const eventDate = dayjs(eventDateInput.value);
+  const eventName = eventNameInput.value;
+
+    //-----------------------------------------------------------------
+    // this section is can be change to do what we want with this data
+  console.log('Event Date:', eventDate.format('YYYY-MM-DD'));
+  console.log('Event Name:', eventName);
+
+  eventDate.textContent = 
+
+
+  //reinitialize the calendar
+  initCalendar();
+}
+
+// Initialize the calendar when the page loads
+window.onload = initCalendar;
