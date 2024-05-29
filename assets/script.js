@@ -1,37 +1,59 @@
-const RExcuse = document.getElementById('randombtn');
-const excuseContainer = document.getElementById('excuseContainer');
-const Ccontent = document.getElementById('displaycontent');
+const excuseButtons = [
+  { id: 'randombtn', url: 'https://excuser-three.vercel.app/v1/excuse' },
+  { id: 'familybtn', url: 'https://excuser-three.vercel.app/v1/excuse/family/' },
+  { id: 'officebtn', url: 'https://excuser-three.vercel.app/v1/excuse/office/'},
+  { id: 'childrenbtn', url: 'https://excuser-three.vercel.app/v1/excuse/children/'},
+  { id: 'collegebtn', url: 'https://excuser-three.vercel.app/v1/excuse/college/'},
+  { id: 'partybtn', url: 'https://excuser-three.vercel.app/v1/excuse/party/'},
+  { id: 'funnybtn', url: 'https://excuser-three.vercel.app/v1/excuse/funny/'},
+  { id: 'unbelievablebtn', url: 'https://excuser-three.vercel.app/v1/excuse/unbelievable/'},
+  { id: 'developersbtn', url: 'https://excuser-three.vercel.app/v1/excuse/developers/'},
+  { id: 'gamingbtn', url: 'https://excuser-three.vercel.app/v1/excuse/gaming/'},
+];
 
-RExcuse.addEventListener('click', myFunction);
+const excuseContainers = {
+  'randombtn': document.getElementById('excuseContainer'),
+  'familybtn': document.getElementById('family-excuseContainer'),
+  'officebtn': document.getElementById('office-excuseContainer'),
+  'childrenbtn': document.getElementById('children-excuseContainer'),
+  'collegebtn': document.getElementById('college-excuseContainer'),
+  'partybtn': document.getElementById('party-excuseContainer'),
+  'funnybtn': document.getElementById('funny-excuseContainer'),
+  'unbelievablebtn': document.getElementById('unbelievable-excuseContainer'),
+  'developersbtn': document.getElementById('developers-excuseContainer'),
+  'gamingbtn': document.getElementById('gaming-excuseContainer'),
+};
 
-function myFunction() {
-    fetch('https://excuser-three.vercel.app/v1/excuse')
-     // When the response is received, convert it to JSON format
-        .then(response => response.json())
-    //  After converting to JSON, handle the data
-        .then(data => {
-            const excuseText = data[0].excuse;
-            // Add quotation marks around the excuse text
-            const quotedExcuse = `"${excuseText}"`;
-            // Update the content of the 'excuseContainer' div with the quoted excuse text
-            excuseContainer.textContent = quotedExcuse;
+excuseButtons.forEach(button => {
+  const btn = document.getElementById(button.id);
+  const container = excuseContainers[button.id];
+  btn.addEventListener('click', () => fetchExcuse(button.url, container));
+});
 
-            // Save last random excuse to local storage
-            localStorage.setItem('quotedExcuse', JSON.stringify(quotedExcuse));
-        })
-        .catch(error => {
-            console.error('Error fetching excuse:', error);
-        });
+function fetchExcuse(url, container) {
+  fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          const excuseText = data[0].excuse;
+          const quotedExcuse = `"${excuseText}"`;
+          container.textContent = quotedExcuse;
+          localStorage.setItem('quotedExcuse', JSON.stringify(quotedExcuse));
+      })
+      .catch(error => {
+          console.error('Error fetching excuse:', error);
+      });
 }
 
+
+
 // Get the modal
-var modal = document.getElementById("myModal");
+const modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-var btn = document.getElementById("modalbtn");
+const btn = document.getElementById("modalbtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
