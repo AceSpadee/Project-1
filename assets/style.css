@@ -14,9 +14,15 @@
 #excusebtn {
     border: 3px solid black;
     padding: 3px;
-  
-/* adding-modal */
+    background-color: var(--lightblue);
+    color: var(--blue);
 }
+
+#excuseContainer {
+    color: var(--lightblue);
+}
+/* adding-modal */
+
 
 .Modal-container {
     padding-top: 10px;
@@ -25,6 +31,8 @@
 #modalbtn {
     border: 3px solid black;
     padding: 3px;
+    background-color: var(--lightblue);
+    color: var(--blue);
 }
 
 /* The Modal (background) */
@@ -65,11 +73,6 @@
     text-decoration: none;
     cursor: pointer;
   }
-
-    background-color: var(--lightblue);
-    color: var(--blue);
-}
-
 
 .navbar {
     background-color: #003f5c;
