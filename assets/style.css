@@ -64,7 +64,7 @@
     color: var(--lightblue);
     display: flex;
     justify-content: flex-end;
-    padding-right: 20px;   
+    padding-right: 60px; 
 }
 
 .navbar a {
@@ -72,6 +72,34 @@
     padding: 15px 12px;
     text-decoration: none;
     color: var(--lightblue);
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+    background-color: var(--darkblue);
+}
+
+.dropdown-content a {
+    display: inline-block;
+    padding: 15px 12px;
+    text-decoration: none;
+    color: var(--lightblue);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 body {
