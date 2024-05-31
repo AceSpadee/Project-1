@@ -72,38 +72,45 @@ window.onclick = function(event) {
   }
 }
 
-// Initialize the calendar
-function initCalendar() {
-  const today = dayjs();
-  const calendarDiv = document.getElementById('calendar');
-  calendarDiv.innerHTML = '';
+document.getElementById('checkButton').addEventListener('click', checkTime);
 
-  // Display calendar for the current month
-  const startOfMonth = today.startOf('month');
-  const endOfMonth = today.endOf('month');
-  const currentMonth = startOfMonth.month();
-  const daysInMonth = endOfMonth.date();
+function checkTime() {
+    const selectedTimeStr = document.getElementById('selectedTime').value;
+    // Parse the selected time string into a Date object
+    const selectedTime = new Date('1970-01-01T' + selectedTimeStr);
+    // Convert the Date object to a Day.js object
+    const selectedDayjs = dayjs(selectedTime);
+    
+    const selectedHour = selectedDayjs.hour();
+    const selectedMinute = selectedDayjs.minute();
+
+    let interval;
+    function checkMatch() {
+      const currentTime = dayjs();
+      const currentHour = currentTime.hour();
+      const currentMinute = currentTime.minute();
+  
+      if (currentHour === selectedHour && currentMinute === selectedMinute) {
+          clearInterval(interval); // Stop the interval immediately
+          // Make a fetch request to get the excuse
+          fetch('https://excuser-three.vercel.app/v1/excuse')
+              .then(response => {
+                  console.log('Response status:', response.status);
+                  return response.json();
+              })
+              .then(data => {
+                  console.log('Response data:', data); // Log the entire response data
+                  const excuse = data[0].excuse; // Extracting the excuse from the first element of the array
+                  console.log('Excuse:', excuse); // Logging the excuse to console
+                  // Display the excuse into the modal
+                  const modalContent = document.querySelector('.modal-content');
+                  const excuseMessage = document.createElement('p');
+                  excuseMessage.textContent = excuse;
+                  modalContent.appendChild(excuseMessage);
+              })
+              .catch(error => console.error('Error fetching excuse:', error));
+      }
+  }
+
+    interval = setInterval(checkMatch, 1000);
 }
-
-// Function to add event
-function addEvent() {
-  const eventDateInput = document.getElementById('event-date');
-  const eventNameInput = document.getElementById('event-name');
-
-  const eventDate = dayjs(eventDateInput.value);
-  const eventName = eventNameInput.value;
-
-    //-----------------------------------------------------------------
-    // this section is can be change to do what we want with this data
-  console.log('Event Date:', eventDate.format('YYYY-MM-DD'));
-  console.log('Event Name:', eventName);
-
-  eventDate.textContent = 
-
-
-  //reinitialize the calendar
-  initCalendar();
-}
-
-// Initialize the calendar when the page loads
-window.onload = initCalendar;
